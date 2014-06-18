@@ -3,14 +3,6 @@ set -e
 
 RAILS_ENV="production"
 
-cd /mete
-git pull
-bundle
-rake db:migrate
-rake assets:clean
-rake assets:clobber
-rake assets:precompile
-
 appHelp () {
   echo "Available options:"
   echo " app:start          - Starts the app (default)"
@@ -19,8 +11,19 @@ appHelp () {
   echo " [command]          - Execute the specified linux command eg. bash."
 }
 
+appUpdate() {
+    cd /mete
+    git pull
+    bundle
+    rake db:migrate
+    rake assets:clean
+    rake assets:clobber
+    rake assets:precompile
+}
+
 case "$1" in
   app:start)
+    appUpdate
     rails s
     ;;
   app:migrate)
@@ -41,7 +44,7 @@ case "$1" in
         shift 1
         $prog $@
       else
-        rails s
+        appHelp
       fi
     fi
     ;;
