@@ -8,9 +8,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -qq -y openssh-server ruby1.9
 
 ADD docker /docker
 
-RUN cd /mete && bundle
-
 # How the instance is launched.
-ENTRYPOINT ["/mete/docker/init"]
+ENTRYPOINT ["/docker/init"]
 CMD ["app:start"]
 EXPOSE 22 80 3000
