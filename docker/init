@@ -21,7 +21,15 @@ appUpdate() {
     rake assets:precompile
 }
 
+appInit() {
+  git clone https://github.com/fnordeingang/mete.git /mete
+  appUpdate
+}
+
 case "$1" in
+  app:init)
+    appInit
+    ;;
   app:start)
     appUpdate
     rails s
